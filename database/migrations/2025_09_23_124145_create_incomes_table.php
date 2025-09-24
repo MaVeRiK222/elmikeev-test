@@ -15,18 +15,18 @@ class CreateIncomesTable extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->integer("income_id")->nullable(); // 23972270,
-            $table->string("number", 50)->nullable(); // "",
-            $table->date("date")->nullable(); // "2024-10-15",
-            $table->date("last_change_date")->nullable(); // "2024-10-17",
-            $table->string("supplier_article", 50)->nullable(); // "0bd4024964e4645d",
-            $table->string("tech_size", 50)->nullable(); // "66e7dff9f98764da",
-            $table->integer("barcode")->nullable(); // 204428427,
-            $table->integer("quantity")->nullable(); // 98,
-            $table->integer("total_price")->nullable(); // "0",
-            $table->date("date_close")->nullable(); // "2024-10-17",
-            $table->string("warehouse_name", 50)->nullable(); // "Казань",
-            $table->integer("nm_id")->nullable(); // 613791486
+            $table->integer("income_id")->nullable();
+            $table->string("number", 50)->nullable();
+            $table->date("date")->nullable();
+            $table->date("last_change_date")->nullable();
+            $table->string("supplier_article", 50)->nullable();
+            $table->string("tech_size", 50)->nullable();
+            $table->integer("barcode")->nullable();
+            $table->integer("quantity")->nullable();
+            $table->integer("total_price")->nullable();
+            $table->date("date_close")->nullable();
+            $table->string("warehouse_name", 50)->nullable();
+            $table->integer("nm_id")->nullable();
             $table->timestamps();
         });
     }
