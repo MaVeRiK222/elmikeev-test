@@ -36,8 +36,14 @@ DB_PASSWORD=ulTCllHt
 
 По переходам на роуты начинается передача данных в БД в соответствующие таблицы
 
+### Скачиваем зависимости
+    composer install
+
+### Генерим ключ
+    php artisan key:generate
+
 ### Запускаем контейнеры
     docker-compose up --build -d
 
 ### Запускаем воркера в Laravel
-    docker-compose exec -d laravel-app php artisan queue:work
+    php artisan queue:work
