@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ApiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/stocks', [ApiController::class, 'getStocks']);
+Route::get('/incomes', [ApiController::class, 'getIncomes']);
+Route::get('/orders', [ApiController::class, 'getOrders']);
+Route::get('/sales', [ApiController::class, 'getSales']);
