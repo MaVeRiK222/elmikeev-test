@@ -48,7 +48,6 @@ class ApiCallsJob implements ShouldQueue
 
         \Log::info('Страница:' . $this->request_param['page']);
         $response = Http::get($this->url, $this->request_param);
-        gc_collect_cycles();
         if (!$response->failed()) {
             $body_array = json_decode($response->body(), 1);
             $data = $body_array['data'];
@@ -57,7 +56,7 @@ class ApiCallsJob implements ShouldQueue
 
             $this->insertData($data);
 
-            \Log::info('API Pagination Data', [
+            \Log::info('Данные с запроса к API:', [
                 'remaining_tries' => $remaining_tries,
                 'request_params' => print_r($this->request_param, 1),
                 'current_page' => $body_array['meta']['current_page'] ?? null,
@@ -92,17 +91,24 @@ class ApiCallsJob implements ShouldQueue
     private function insertData($data)
     {
         $data_chunks = array_chunk($data, 100, true);
-        DB::beginTransaction();
         foreach ($data_chunks as $chunk) {
-            $current_datetime = Carbon::now()->toDateTimeString();
-            $prepared_data = array_map(function ($item) use ($current_datetime) {
-                $timestamps['created_at'] = $current_datetime;
-                $timestamps['updated_at'] = $current_datetime;
-                return array_merge($item, $timestamps);
-            }, $chunk);
-            $this->model_name::insert($prepared_data);
-            unset($prepared_data, $chunk);
+
+            try {
+                DB::transaction(function () use ($chunk) {
+                    $current_datetime = Carbon::now()->toDateTimeString();
+                    $prepared_data = array_map(function ($item) use ($current_datetime) {
+                        return array_merge($item, [
+                            'created_at' => $current_datetime,
+                            'updated_at' => $current_datetime,
+                        ]);
+                    }, $chunk);
+
+                    return $this->model_name::insert($prepared_data);
+                }, 5);
+            } catch (\Exception $e) {
+                \Log::error("Проблема с вставкой данных в БД: " . $e->getMessage());
+            }
         }
-        DB::commit();
+
     }
 }
