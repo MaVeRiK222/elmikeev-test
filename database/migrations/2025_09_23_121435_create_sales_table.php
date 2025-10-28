@@ -35,8 +35,8 @@ class CreateSalesTable extends Migration
             $table->string("odid", 50)->nullable();
             $table->integer("spp")->nullable();
             $table->decimal("for_pay", 8, 2)->nullable();
-            $table->integer("finished_price")->nullable();
-            $table->integer("price_with_disc")->nullable();
+            $table->decimal("finished_price", 10, 2)->nullable();
+            $table->decimal("price_with_disc", 10,2)->nullable();
             $table->integer("nm_id")->nullable();
             $table->string("subject", 50)->nullable();
             $table->string("category", 50)->nullable();

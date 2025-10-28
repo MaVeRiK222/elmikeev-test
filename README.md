@@ -13,13 +13,22 @@ https://www.postman.com//cy322666/workspace/app-api-test/overview
 
 ### Данные БД:
 
-DB_HOST=141.8.193.236
+DB_CONNECTION=pgsql
 
-DB_DATABASE=f1172683_laravel
+DB_HOST=aws-1-eu-west-1.pooler.supabase.com
 
-DB_USERNAME=f1172683_laravel
+DB_PORT=6543
 
-DB_PASSWORD=ulTCllHt
+DB_DATABASE=postgres
+
+DB_USERNAME=postgres.qzigtvfojouvhzplkhqc
+
+DB_PASSWORD=xG6RHpiQXBmZrsy!
+
+Для локального MySQL все данные сохраняются без потерь, из бесплатных сервисов
+хорошо работает только Supabase на PostgreSQL.
+
+Большой разницы работы с MySQL и PostgreSQL в рамках этого тестового нет.
 
 ### Названия таблиц:
 
