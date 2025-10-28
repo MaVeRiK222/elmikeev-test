@@ -23,7 +23,7 @@ class CreateIncomesTable extends Migration
             $table->string("tech_size", 50)->nullable();
             $table->integer("barcode")->nullable();
             $table->integer("quantity")->nullable();
-            $table->integer("total_price")->nullable();
+            $table->decimal("total_price",10,2)->nullable();
             $table->date("date_close")->nullable();
             $table->string("warehouse_name", 50)->nullable();
             $table->integer("nm_id")->nullable();

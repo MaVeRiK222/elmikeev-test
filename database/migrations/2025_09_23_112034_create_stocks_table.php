@@ -33,8 +33,8 @@ class CreateStocksTable extends Migration
             $table->string("category", 50)->nullable();
             $table->string("brand", 50)->nullable();
             $table->integer("sc_code")->nullable();
-            $table->integer("price")->nullable();
-            $table->integer("discount")->nullable();
+            $table->decimal("price",10,2)->nullable();
+            $table->decimal("discount",10,2)->nullable();
             $table->timestamps();
         });
     }
